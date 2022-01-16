@@ -58,8 +58,4 @@ public class StudentCltr {
 		return "forward:StudentList";
 	}
 	
-//	@RequestMapping("Student")
-//	public Object showStudent() {
-//		
-//	}
 }
