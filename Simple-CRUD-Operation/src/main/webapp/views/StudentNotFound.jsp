@@ -8,7 +8,7 @@
 </head>
 <body>
 <h3 align="center" >Student Not Found</h3><hr>
-<a href="index.jsp">Home</a><br>
+<a href="/">Home</a><br>
 	<a href="ViewForm">Add new Student</a>
 </body>
 </html>
