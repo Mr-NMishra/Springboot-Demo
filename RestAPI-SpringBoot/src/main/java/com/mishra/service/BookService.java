@@ -2,6 +2,7 @@ package com.mishra.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
@@ -39,6 +40,18 @@ public class BookService {
 		bookList.add(book);
 		System.out.println(book);
 		return book;
+	}
+	
+	//Deleting book by ID
+	public void removeBookById(int bookId) {
+		Stream<Book> stream= bookList.stream();
+		bookList= stream.filter(book->{
+			if(book.getbId()!=bookId) {
+				return true;
+			}else{
+				return false;
+			}
+		}).collect(Collectors.toList());
 	}
 
 }
