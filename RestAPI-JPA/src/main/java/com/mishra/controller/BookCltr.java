@@ -76,14 +76,14 @@ public class BookCltr {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	   }
 	}
-//
-//	// updatingBook /
-//	@PutMapping("/books/{id}")
-//	  public ResponseEntity<Book> // * updateBook(@RequestBody Book
-//	 * book,@PathVariable("id") int bookId)
-//	{ Book // * flag=
-//	 * bookService.updateBook(book,bookId); if(flag!=null) { return // *
-//	 * ResponseEntity.ok(flag); }else return // *
-//	 * ResponseEntity.status(HttpStatus.NOT_MODIFIED).build(); } //
+
+	// updatingBook 
+	@PutMapping("/books/{id}")
+	  public ResponseEntity<Book> updateBook(@RequestBody Book book,@PathVariable("id") int bookId){
+		Book flag= bookService.updateBook(book,bookId); 
+		if(flag!=null) {
+			return  ResponseEntity.ok(flag);
+		}else return  ResponseEntity.status(HttpStatus.NOT_MODIFIED).build(); 
+	} 
 
 }

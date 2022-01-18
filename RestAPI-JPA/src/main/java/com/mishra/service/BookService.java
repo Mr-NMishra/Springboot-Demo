@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.mishra.dao.BookRepository;
+import com.mishra.entities.Author;
 import com.mishra.entities.Book;
 
 @Service
 public class BookService {
 	@Autowired
 	private BookRepository bookRepository;
-	// private static List<Book> bookList = new ArrayList<>();
 
 	// sending all Books
 	public List<Book> findAllBook() {
@@ -66,14 +66,27 @@ public class BookService {
 		return null;
 	}
 
-//	 // updatingBook 
-//	 public Book updateBook(Book book, int id) { var outerFlag=
-//	 * new Object() { Book flag=null;}; // using java stream feature // here map is
-//	 * used to updating or copy map bookList = bookList.stream().map(streamBook -> {
-//	 * 
-//	 * if (streamBook.getbId() == id) { streamBook.setAuthor(book.getAuthor());
-//	 * streamBook.setTitle(book.getTitle()); outerFlag.flag=streamBook; } return
-//	 * streamBook; }).collect(Collectors.toList()); System.out.println(book); return
-//	 * outerFlag.flag; }
+	// updatingBook
+	public Book updateBook(Book book, int id) {
+		try {
+			Book savedBook=getBookById(id);
+			savedBook.setTitle(book.getTitle());
+			Author author= book.getAuthor();
+			int authid=author.getId();
+			String name=author.getName();
+			String language=author.getLanguage();
+			Book authBook=author.getBook();
+			
+			savedBook.setAuthor(new Author(authid, name, language));
+//			savedBook.setAuthor(book.getAuthor());
+			bookRepository.save(savedBook);
+			return savedBook;
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 }
