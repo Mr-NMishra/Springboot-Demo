@@ -54,19 +54,23 @@ public class BookService {
 	}
 
 	// Deleting book by ID
-	public void removeBookById(int bookId) {
-
+	public Book removeBookById(int bookId) {
+		var wrapper= new Object() {Book flag=null;};
 		// we are using stream filter method to filter out our list
 		// and saving new list to our old list, here we just skip the
 		// book whose id is matched
 		Stream<Book> stream = bookList.stream();
 		bookList = stream.filter(book -> {
+			
 			if (book.getbId() != bookId) {
 				return true;
 			} else {
+				wrapper.flag=book;
 				return false;
 			}
 		}).collect(Collectors.toList());
+		
+		return wrapper.flag;
 	}
 
 	// updatingBook

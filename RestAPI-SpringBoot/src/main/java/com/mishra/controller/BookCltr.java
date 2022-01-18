@@ -60,15 +60,22 @@ public class BookCltr {
 	public ResponseEntity<Book> addBook(@RequestBody Book newbook) {
 		Book book=bookService.addBook(newbook);
 		if(book!=null)
-			return ResponseEntity.of(Optional.of(book));
+			return ResponseEntity.ok(book);
 		else	
 			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build(); 
 	}
 	
 	//Deleting Book
 	@DeleteMapping("/books/{id}")
-	public void deleteById(@PathVariable("id") int bookId) {
-		 bookService.removeBookById(bookId);
+	public ResponseEntity<Void> deleteById(@PathVariable("id") int bookId) {
+		Book flag=bookService.removeBookById(bookId);
+		if(flag!=null) { 
+			bookService.removeBookById(bookId);
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		} else {
+			// TODO: handle exception
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
 	}
 	
 	
