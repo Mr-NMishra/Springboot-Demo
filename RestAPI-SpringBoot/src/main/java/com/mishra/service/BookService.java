@@ -41,10 +41,16 @@ public class BookService {
 	}
 
 	// adding book to our temp or fake database
-	public Book addBook(Book book) {
-		bookList.add(book);
-		System.out.println(book);
-		return book;
+	public  Book addBook(Book book) {
+		try {
+			if(book.getbId()!=0) {
+				bookList.add(book);
+				return book;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	// Deleting book by ID

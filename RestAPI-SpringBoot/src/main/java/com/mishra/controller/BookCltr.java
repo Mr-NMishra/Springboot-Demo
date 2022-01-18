@@ -45,19 +45,24 @@ public class BookCltr {
 	//Getting books using Id
 	@GetMapping("/books/{id}")
 	public ResponseEntity<Book> findByBookId(@PathVariable("id") int bookId) {
+		//first we check book is present or not in service
 		Book book=bookService.getBookById(bookId);
-		System.out.println("----------------->"+book);
 		if(book!=null)
+			//if present then add to reponse body
 		return ResponseEntity.of(Optional.of(book));
 		else
+			//if not the return with http code
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		//return bookService.getBookById(bookId);
 	}
 	
 	//Adding Books 
 	@PostMapping("/books")
-	public Book addBook(@RequestBody Book book) {
-		return bookService.addBook(book);
+	public ResponseEntity<Book> addBook(@RequestBody Book newbook) {
+		Book book=bookService.addBook(newbook);
+		if(book!=null)
+			return ResponseEntity.of(Optional.of(book));
+		else	
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build(); 
 	}
 	
 	//Deleting Book
