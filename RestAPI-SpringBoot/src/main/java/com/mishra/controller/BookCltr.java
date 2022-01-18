@@ -2,11 +2,12 @@ package com.mishra.controller;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mishra.entities.Book;
@@ -28,5 +29,11 @@ public class BookCltr {
 	@GetMapping("books/{id}")
 	public Book findByBookId(@PathVariable("id") int bookId) {
 		return bookService.getBookById(bookId);
+	}
+	
+	//Adding Books 
+	@PostMapping("/books")
+	public Book addBook(@RequestBody Book book) {
+		return bookService.addBook(book);
 	}
 }

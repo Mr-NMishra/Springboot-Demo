@@ -33,5 +33,12 @@ public class BookService {
 		Book book = stream.findFirst().get();
 		return book;
 	}
+	
+	//adding book to our temp or fake database
+	public Book addBook(Book book) {
+		bookList.add(book);
+		System.out.println(book);
+		return book;
+	}
 
 }
