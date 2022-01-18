@@ -4,15 +4,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Author {
 	@javax.persistence.Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Auth")
+	@SequenceGenerator(name = "Auth",initialValue = 101)
 	private int Id;
 	private String name;
 	private String language;
-	@ManyToOne
+	@OneToOne(mappedBy = "author")
+	@JsonBackReference
 	private Book book;
 
 	public Author(int id, String name, String language) {
