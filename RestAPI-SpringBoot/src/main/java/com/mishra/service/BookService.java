@@ -28,11 +28,15 @@ public class BookService {
 
 	// sending only specific book
 	public Book getBookById(int BookId) {
-
-		System.out.println("start-----------------------------------------------");
-		Stream<Book> stream = bookList.stream();
-		stream = stream.filter(book -> book.getbId() == BookId);
-		Book book = stream.findFirst().get();
+		Book book=null;
+		try {
+			Stream<Book> stream = bookList.stream();
+			stream = stream.filter(streamBook -> streamBook.getbId() == BookId);
+			book = stream.findFirst().get();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("---------------->Book-----"+book);
 		return book;
 	}
 
@@ -61,13 +65,13 @@ public class BookService {
 
 	// updatingBook
 	public Book updateBook(Book book, int id) {
-		//using java stream feature 
-		//here map is used to updating or copy map
+		// using java stream feature
+		// here map is used to updating or copy map
 		System.out.println(book);
-		bookList= bookList.stream().map(streamBook->{
-			
-			if(streamBook.getbId()==id) {
-				
+		bookList = bookList.stream().map(streamBook -> {
+
+			if (streamBook.getbId() == id) {
+
 				streamBook.setAuthor(book.getAuthor());
 				streamBook.setName(book.getName());
 				System.out.println(book);

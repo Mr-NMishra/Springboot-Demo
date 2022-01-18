@@ -44,8 +44,14 @@ public class BookCltr {
 	
 	//Getting books using Id
 	@GetMapping("/books/{id}")
-	public Book findByBookId(@PathVariable("id") int bookId) {
-		return bookService.getBookById(bookId);
+	public ResponseEntity<Book> findByBookId(@PathVariable("id") int bookId) {
+		Book book=bookService.getBookById(bookId);
+		System.out.println("----------------->"+book);
+		if(book!=null)
+		return ResponseEntity.of(Optional.of(book));
+		else
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		//return bookService.getBookById(bookId);
 	}
 	
 	//Adding Books 
