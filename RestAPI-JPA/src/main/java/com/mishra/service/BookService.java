@@ -21,6 +21,7 @@ public class BookService {
 	// sending all Books
 	public List<Book> findAllBook() {
 		List<Book> bookList=(List<Book>)  bookRepository.findAll();
+		System.out.println("----"+bookList);
 		return bookList;
 	}
 
