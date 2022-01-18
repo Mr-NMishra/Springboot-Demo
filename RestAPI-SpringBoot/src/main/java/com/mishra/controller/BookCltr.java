@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,7 +28,7 @@ public class BookCltr {
 	}
 	
 	//Getting books using Id
-	@GetMapping("books/{id}")
+	@GetMapping("/books/{id}")
 	public Book findByBookId(@PathVariable("id") int bookId) {
 		return bookService.getBookById(bookId);
 	}
@@ -38,8 +39,16 @@ public class BookCltr {
 		return bookService.addBook(book);
 	}
 	
-	@DeleteMapping("books/{id}")
+	//Deleting Book
+	@DeleteMapping("/books/{id}")
 	public void deleteById(@PathVariable("id") int bookId) {
 		 bookService.removeBookById(bookId);
+	}
+	
+	
+	//updatingBook
+	@PutMapping("/books/{id}")
+	public Book updateBook(@RequestBody Book book,@PathVariable("id") int bookId) {
+		return bookService.updateBook(book,bookId);
 	}
 }

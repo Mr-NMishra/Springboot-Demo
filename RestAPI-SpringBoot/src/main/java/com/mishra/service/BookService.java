@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.mishra.entities.Book;
 
@@ -34,24 +35,47 @@ public class BookService {
 		Book book = stream.findFirst().get();
 		return book;
 	}
-	
-	//adding book to our temp or fake database
+
+	// adding book to our temp or fake database
 	public Book addBook(Book book) {
 		bookList.add(book);
 		System.out.println(book);
 		return book;
 	}
-	
-	//Deleting book by ID
+
+	// Deleting book by ID
 	public void removeBookById(int bookId) {
-		Stream<Book> stream= bookList.stream();
-		bookList= stream.filter(book->{
-			if(book.getbId()!=bookId) {
+
+		// we are using stream filter method to filter out our list
+		// and saving new list to our old list, here we just skip the
+		// book whose id is matched
+		Stream<Book> stream = bookList.stream();
+		bookList = stream.filter(book -> {
+			if (book.getbId() != bookId) {
 				return true;
-			}else{
+			} else {
 				return false;
 			}
 		}).collect(Collectors.toList());
+	}
+
+	// updatingBook
+	public Book updateBook(Book book, int id) {
+		//using java stream feature 
+		//here map is used to updating or copy map
+		System.out.println(book);
+		bookList= bookList.stream().map(streamBook->{
+			
+			if(streamBook.getbId()==id) {
+				
+				streamBook.setAuthor(book.getAuthor());
+				streamBook.setName(book.getName());
+				System.out.println(book);
+			}
+			return streamBook;
+		}).collect(Collectors.toList());
+		System.out.println(book);
+		return book;
 	}
 
 }
