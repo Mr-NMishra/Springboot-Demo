@@ -73,8 +73,8 @@ public class BookService {
 	}
 
 	// updatingBook
-	public boolean updateBook(Book book, int id) {
-		var outerFlag= new Object() { boolean flag=false;};
+	public Book updateBook(Book book, int id) {
+		var outerFlag= new Object() { Book flag=null;};
 		// using java stream feature
 		// here map is used to updating or copy map
 		bookList = bookList.stream().map(streamBook -> {
@@ -82,7 +82,7 @@ public class BookService {
 			if (streamBook.getbId() == id) {
 				streamBook.setAuthor(book.getAuthor());
 				streamBook.setName(book.getName());
-				outerFlag.flag=true;
+				outerFlag.flag=streamBook;
 			}
 			return streamBook;
 		}).collect(Collectors.toList());

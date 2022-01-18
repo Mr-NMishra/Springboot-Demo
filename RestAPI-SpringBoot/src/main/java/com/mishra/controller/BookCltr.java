@@ -80,9 +80,9 @@ public class BookCltr {
 	// updatingBook
 	@PutMapping("/books/{id}")
 	public ResponseEntity<Book> updateBook(@RequestBody Book book,@PathVariable("id") int bookId) {
-		boolean flag= bookService.updateBook(book,bookId);
-		if(flag) {
-			return ResponseEntity.status(HttpStatus.OK).build();
+		Book flag= bookService.updateBook(book,bookId);
+		if(flag!=null) {
+			return ResponseEntity.ok(flag);
 		}else
 			return ResponseEntity.status(HttpStatus.NOT_MODIFIED).build();
 	}
