@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class BaseController {
 
 	@ResponseBody
-	@RequestMapping("home")
+	@RequestMapping("")
 	public String home() {
-		return "home-responsebody";
+		return "home";
 	}
 }
