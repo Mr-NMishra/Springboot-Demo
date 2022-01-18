@@ -36,7 +36,6 @@ public class BookService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("---------------->Book-----"+book);
 		return book;
 	}
 
@@ -74,22 +73,21 @@ public class BookService {
 	}
 
 	// updatingBook
-	public Book updateBook(Book book, int id) {
+	public boolean updateBook(Book book, int id) {
+		var outerFlag= new Object() { boolean flag=false;};
 		// using java stream feature
 		// here map is used to updating or copy map
-		System.out.println(book);
 		bookList = bookList.stream().map(streamBook -> {
 
 			if (streamBook.getbId() == id) {
-
 				streamBook.setAuthor(book.getAuthor());
 				streamBook.setName(book.getName());
-				System.out.println(book);
+				outerFlag.flag=true;
 			}
 			return streamBook;
 		}).collect(Collectors.toList());
 		System.out.println(book);
-		return book;
+		return outerFlag.flag;
 	}
 
 }
