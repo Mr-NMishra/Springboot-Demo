@@ -65,21 +65,25 @@ public class BookCltr {
 	}
 
 	// Deleting Book
-	/*
-	 * @DeleteMapping("/books/{id}") public ResponseEntity<Void>
-	 * deleteById(@PathVariable("id") int bookId) { Book flag =
-	 * bookService.removeBookById(bookId); if (flag != null) {
-	 * bookService.removeBookById(bookId); return
-	 * ResponseEntity.status(HttpStatus.NO_CONTENT).build(); } else { // TODO:
-	 * handle exception return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-	 * } }
-	 * 
-	 * // updatingBook
-	 * 
-	 * @PutMapping("/books/{id}") public ResponseEntity<Book>
-	 * updateBook(@RequestBody Book book,@PathVariable("id") int bookId) { Book
-	 * flag= bookService.updateBook(book,bookId); if(flag!=null) { return
-	 * ResponseEntity.ok(flag); }else return
-	 * ResponseEntity.status(HttpStatus.NOT_MODIFIED).build(); }
-	 */
+
+	@DeleteMapping("/books/{id}") 
+	public ResponseEntity<Void> deleteById(@PathVariable("id") int bookId) {
+		String flag = bookService.removeBookById(bookId); 
+		if (flag!=null) { 
+			return  ResponseEntity.status(HttpStatus.NO_CONTENT).build(); 
+		} else { 
+		
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	   }
+	}
+//
+//	// updatingBook /
+//	@PutMapping("/books/{id}")
+//	  public ResponseEntity<Book> // * updateBook(@RequestBody Book
+//	 * book,@PathVariable("id") int bookId)
+//	{ Book // * flag=
+//	 * bookService.updateBook(book,bookId); if(flag!=null) { return // *
+//	 * ResponseEntity.ok(flag); }else return // *
+//	 * ResponseEntity.status(HttpStatus.NOT_MODIFIED).build(); } //
+
 }
